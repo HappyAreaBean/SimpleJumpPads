@@ -1,6 +1,6 @@
 package cc.happyareabean.jumppad.commands;
 
-import cc.happyareabean.jumppad.SimpleJumpPad;
+import cc.happyareabean.jumppad.SimpleJumpPads;
 import cc.happyareabean.jumppad.commands.exception.InValidOffSetException;
 import cc.happyareabean.jumppad.manager.JumpPadsManager;
 import cc.happyareabean.jumppad.object.JumpPadsDirection;
@@ -37,7 +37,7 @@ import revxrsal.commands.help.Help;
 @CommandPermission("simplejumppads.admin")
 public class JumpPadsCommand {
 
-    private final JumpPadsManager manager = SimpleJumpPad.INSTANCE.getJumpPadsManager();
+    private final JumpPadsManager manager = SimpleJumpPads.INSTANCE.getJumpPadsManager();
 
     @CommandPlaceholder
     public void help(BukkitCommandActor actor, @Range(min= 1) @Default("1") int page, Help.RelatedCommands<BukkitCommandActor> help) {

@@ -1,6 +1,6 @@
 package cc.happyareabean.jumppad.utils;
 
-import cc.happyareabean.jumppad.SimpleJumpPad;
+import cc.happyareabean.jumppad.SimpleJumpPads;
 import com.google.common.base.Strings;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
@@ -45,7 +45,7 @@ public class CommandUtils {
         var commandList = Help.paginate(list, page, elementsPerPage);
         var numberOfPages = Help.numberOfPages(list.size(), elementsPerPage);
 
-        var header = processHeader(SimpleJumpPad.INSTANCE.getPluginMeta().getName(), "=", 48);
+        var header = processHeader(SimpleJumpPads.INSTANCE.getPluginMeta().getName(), "=", 48);
         var footer = processFooter("=", 52);
 
         componentList.add(header);

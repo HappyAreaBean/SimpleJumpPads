@@ -10,9 +10,9 @@ import revxrsal.commands.bukkit.BukkitLamp;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
 @Getter
-public final class SimpleJumpPad extends JavaPlugin {
+public final class SimpleJumpPads extends JavaPlugin {
 
-    public static SimpleJumpPad INSTANCE;
+    public static SimpleJumpPads INSTANCE;
 
     private Lamp<BukkitCommandActor> commandHandler;
 

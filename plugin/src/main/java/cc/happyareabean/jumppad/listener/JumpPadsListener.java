@@ -1,6 +1,6 @@
 package cc.happyareabean.jumppad.listener;
 
-import cc.happyareabean.jumppad.SimpleJumpPad;
+import cc.happyareabean.jumppad.SimpleJumpPads;
 import cc.happyareabean.jumppad.manager.JumpPadsManager;
 import cc.happyareabean.jumppad.object.JumpPadsObject;
 import lombok.RequiredArgsConstructor;
@@ -86,7 +86,7 @@ public class JumpPadsListener implements Listener {
                     double rad = Math.toRadians(angle);
                     return new Vector(Math.cos(rad) * horizontalBoost, verticalBoost, Math.sin(rad) * horizontalBoost);
                 } catch (NumberFormatException e) {
-                    SimpleJumpPad.INSTANCE.getSLF4JLogger().warn("Invalid direction in config: {}", direction);
+                    SimpleJumpPads.INSTANCE.getSLF4JLogger().warn("Invalid direction in config: {}", direction);
                     return new Vector(0, 0, 0);
                 }
         }

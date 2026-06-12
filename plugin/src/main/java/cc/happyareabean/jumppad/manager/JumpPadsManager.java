@@ -1,6 +1,6 @@
 package cc.happyareabean.jumppad.manager;
 
-import cc.happyareabean.jumppad.SimpleJumpPad;
+import cc.happyareabean.jumppad.SimpleJumpPads;
 import cc.happyareabean.jumppad.config.JumpPadsData;
 import cc.happyareabean.jumppad.listener.JumpPadsListener;
 import cc.happyareabean.jumppad.object.JumpPadsObject;
@@ -23,11 +23,11 @@ import java.util.UUID;
 
 public class JumpPadsManager {
 
-    private final SimpleJumpPad plugin;
+    private final SimpleJumpPads plugin;
     @Getter
     private YamlConfigurationStore<JumpPadsData> store;
     private JumpPadsData config;
-    private final Path configPath = SimpleJumpPad.INSTANCE.getDataFolder().toPath().resolve("jumppads.yml");
+    private final Path configPath = SimpleJumpPads.INSTANCE.getDataFolder().toPath().resolve("jumppads.yml");
 
     @Getter
     private final List<Location> jumpPadsLocations = new ArrayList<>();
@@ -35,7 +35,7 @@ public class JumpPadsManager {
     @Getter
     private final Map<UUID, JumpPadsTargetLocation> targetLocationMap = new HashMap<>();
 
-    public JumpPadsManager(SimpleJumpPad plugin) {
+    public JumpPadsManager(SimpleJumpPads plugin) {
         this.plugin = plugin;
     }
 
