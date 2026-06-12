@@ -52,4 +52,4 @@ https://docs.happyareabean.cc/docs/simplejumppads/directions
 [discord-shield]: https://img.shields.io/discord/347679658369613826?style=for-the-badge&logo=DISCORD&logoColor=%23fff&color=%235762d6
 [discord-url]: https://go.happyareabean.cc/supportdiscord
 [download-modrinth]: https://media.happyareabean.cc/badges/available-on/modrinth.png
-[download-modrinth-url]: https://modrinth.com/plugin/sjm
+[download-modrinth-url]: https://modrinth.com/plugin/sjp
