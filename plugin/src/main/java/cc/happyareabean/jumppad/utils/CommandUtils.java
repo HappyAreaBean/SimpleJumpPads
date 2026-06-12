@@ -62,7 +62,7 @@ public class CommandUtils {
                                 builder.match(Pattern.compile("[<>\\[\\]]"))
                                         .replacement((matchResult, builder1) -> builder1.color(NamedTextColor.GREEN));
                             })
-                            .clickEvent(ClickEvent.runCommand("/" + command.path()))
+                            .clickEvent(ClickEvent.suggestCommand("/" + command.path()))
                             .hoverEvent(HoverEvent.showText(text(description != null ? description : "This command has no description.", NamedTextColor.GRAY))));
             componentList.add(component.build());
         });
