@@ -76,7 +76,7 @@ public class JumpPadsManager {
                             .count(particle.getCount())
                             .offset(particle.getOffSet().getX(), particle.getOffSet().getY(), particle.getOffSet().getZ())
                             .location(object.getLocation())
-                            .receivers(32, true)
+                            .receivers(particle.getRadius(), particle.isByDistance())
                             .extra(particle.getSpeed())
                             .spawn();
 
