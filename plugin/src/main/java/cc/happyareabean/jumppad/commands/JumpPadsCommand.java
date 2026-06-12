@@ -45,7 +45,7 @@ public class JumpPadsCommand {
     }
 
     @Subcommand("add")
-    public void add(BukkitCommandActor actor, double horizonBoost, double vertBoost, JumpPadsDirection direction, @Optional Boolean top) {
+    public void add(BukkitCommandActor actor, double horizonBoost, double vertBoost, JumpPadsDirection direction) {
         Player player = actor.requirePlayer();
         Location location = getTargetBlockLocation(player);
 
