@@ -34,6 +34,18 @@ dependencies {
 tasks.shadowJar {
     archiveClassifier.set("")
     archiveBaseName.set(rootProject.name)
+
+    mergeServiceFiles()
+    filesMatching("META-INF/services/**") {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    val base = "cc.happyareabean.jumppad.libs"
+    relocate("de.exlll.configlib", "${base}.configlib")
+    relocate("revxrsal.commands", "${base}.lamp")
+    dependencies {
+        exclude(dependency("org.snakeyaml:snakeyaml-engine")) // transitive dep from configlib
+    }
 }
 
 val shadowDevJar by tasks.registering(ShadowJar::class) {
