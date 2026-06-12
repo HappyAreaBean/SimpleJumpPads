@@ -6,7 +6,6 @@ import cc.happyareabean.jumppad.object.JumpPadsObject;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Registry;
 import org.bukkit.block.Block;
@@ -16,8 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-import java.time.Duration;
-
 @RequiredArgsConstructor
 public class JumpPadsListener implements Listener {
 
@@ -26,7 +23,6 @@ public class JumpPadsListener implements Listener {
     @SuppressWarnings("PatternValidation")
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
-        long start = System.nanoTime();
         Player player = e.getPlayer();
         Block block = player.getLocation().getBlock();
         Location location = block.getLocation();
@@ -58,9 +54,6 @@ public class JumpPadsListener implements Listener {
                 }
             }
         }
-
-        long end = System.nanoTime();
-        player.sendMessage(Component.text(Duration.ofNanos(end - start).toMillis() + "ms"));
     }
 
     private Vector getBoostVector(Player player, String direction, double horizontalBoost, double verticalBoost) {
@@ -94,7 +87,7 @@ public class JumpPadsListener implements Listener {
                     return new Vector(Math.cos(rad) * horizontalBoost, verticalBoost, Math.sin(rad) * horizontalBoost);
                 } catch (NumberFormatException e) {
                     SimpleJumpPad.INSTANCE.getSLF4JLogger().warn("Invalid direction in config: {}", direction);
-                    return new Vector(0, verticalBoost, 0);
+                    return new Vector(0, 0, 0);
                 }
         }
     }
