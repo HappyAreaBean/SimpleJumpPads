@@ -8,6 +8,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.Nullable;
 import revxrsal.commands.bukkit.actor.BukkitCommandActor;
@@ -45,7 +46,7 @@ public class CommandUtils {
         var numberOfPages = Help.numberOfPages(list.size(), elementsPerPage);
 
         var header = processHeader(SimpleJumpPad.INSTANCE.getPluginMeta().getName(), "=", 48);
-        var footer = processFooter("=", 48);
+        var footer = processFooter("=", 52);
 
         componentList.add(header);
         componentList.add(Component.empty());
@@ -56,11 +57,11 @@ public class CommandUtils {
                     .appendSpace()
                     .append(text("●", NamedTextColor.DARK_GRAY))
                     .appendSpace()
-                    .append(text("/", NamedTextColor.YELLOW))
-                    .append(text(usage, NamedTextColor.YELLOW)
+                    .append(text("/", TextColor.fromCSSHexString("#FF4D4D")))
+                    .append(text(usage, NamedTextColor.WHITE)
                             .replaceText(builder -> {
                                 builder.match(Pattern.compile("[<>\\[\\]]"))
-                                        .replacement((matchResult, builder1) -> builder1.color(NamedTextColor.GREEN));
+                                        .replacement((matchResult, builder1) -> builder1.color(TextColor.fromCSSHexString("#FF4D4D")));
                             })
                             .clickEvent(ClickEvent.suggestCommand("/" + command.path()))
                             .hoverEvent(HoverEvent.showText(text(description != null ? description : "This command has no description.", NamedTextColor.GRAY))));
@@ -89,7 +90,7 @@ public class CommandUtils {
         TextComponent.Builder pageText = text()
                 .color(NamedTextColor.GOLD);
 
-        pageText.append(MM.deserialize("<reset><dark_gray>================<gray>[ </reset>"));
+        pageText.append(MM.deserialize("<reset><dark_gray>================<color:#E63946>[ </reset>"));
 
         pageText.append(text("⬅", !havePreviousPage ? NamedTextColor.DARK_GRAY : null)
                 .decorate(TextDecoration.BOLD)
@@ -103,7 +104,7 @@ public class CommandUtils {
                 .clickEvent(haveNextPage ? ClickEvent.runCommand(String.format(commandFormat, nextPage)) : null)
                 .hoverEvent(haveNextPage ? text(String.format("Page %s", nextPage)).color(NamedTextColor.GOLD) : null));
 
-        pageText.append(MM.deserialize(" <reset><gray>]<dark_gray>================</reset>"));
+        pageText.append(MM.deserialize(" <reset><color:#E63946>]<dark_gray>================</reset>"));
 
         return pageText.build();
     }
@@ -116,13 +117,11 @@ public class CommandUtils {
         String bar = Strings.repeat(symbol, side);
 
         return Component.textOfChildren(
-                text(bar, NamedTextColor.GREEN),
-                text("[", NamedTextColor.DARK_GRAY),
+                MM.deserialize("<reset><dark_gray>%s<color:#E63946>[</reset>".formatted(bar)),
                 space(),
-                text(name, NamedTextColor.YELLOW, TextDecoration.BOLD),
+                MM.deserialize("<b><gradient:#FF4D4D:#E63946:#C1121F>Simple<gradient:#F5F7FA:#DDE3E9:#C5CDD5>JumpPads"),
                 space(),
-                text("]", NamedTextColor.DARK_GRAY),
-                text(bar, NamedTextColor.GREEN)
+                MM.deserialize("<reset><color:#C5CDD5>]<dark_gray>%s</reset>".formatted(bar))
         );
     }
 
