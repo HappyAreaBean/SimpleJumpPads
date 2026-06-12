@@ -43,11 +43,9 @@ tasks.shadowJar {
 
     val base = "cc.happyareabean.jumppad.libs"
     relocate("de.exlll.configlib", "${base}.configlib")
+    relocate("org.snakeyaml", "${base}.snakeyaml")
     relocate("revxrsal.commands", "${base}.lamp")
     relocate("org.bstats", "${base}.bstats")
-    dependencies {
-        exclude(dependency("org.snakeyaml:snakeyaml-engine")) // transitive dep from configlib
-    }
 }
 
 val shadowDevJar by tasks.registering(ShadowJar::class) {
