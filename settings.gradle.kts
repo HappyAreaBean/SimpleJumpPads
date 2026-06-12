@@ -1,4 +1,4 @@
-rootProject.name = "SimpleJumpPad"
+rootProject.name = "SimpleJumpPads"
 
 include("shared")
 include("plugin")

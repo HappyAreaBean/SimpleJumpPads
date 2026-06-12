@@ -69,12 +69,12 @@ tasks {
 }
 
 paper {
-    name = "SimpleJumpPad"
+    name = "SimpleJumpPads"
     description = "This is a simple jump pad plugin for your Minecraft server!"
     website = "https://happyareabean.cc"
     authors = listOf("HappyAreaBean")
 
-    main = "cc.happyareabean.jumppad.SimpleJumpPad"
+    main = "cc.happyareabean.jumppad.SimpleJumpPads"
     apiVersion = "1.19"
 
     defaultPermission = BukkitPluginDescription.Permission.Default.OP
