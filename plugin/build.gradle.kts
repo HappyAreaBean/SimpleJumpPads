@@ -70,7 +70,7 @@ tasks {
 
 paper {
     name = "SimpleJumpPads"
-    description = "This is a simple jump pad plugin for your Minecraft server!"
+    description = "Simple and feature packed jump pads plugin for your server!"
     website = "https://happyareabean.cc"
     authors = listOf("HappyAreaBean")
 
