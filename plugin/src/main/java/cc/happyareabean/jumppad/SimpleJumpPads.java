@@ -4,6 +4,8 @@ import cc.happyareabean.jumppad.commands.JumpPadsCommand;
 import cc.happyareabean.jumppad.commands.JumpPadsVisitor;
 import cc.happyareabean.jumppad.manager.JumpPadsManager;
 import lombok.Getter;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SingleLineChart;
 import org.bukkit.plugin.java.JavaPlugin;
 import revxrsal.commands.Lamp;
 import revxrsal.commands.bukkit.BukkitLamp;
@@ -26,6 +28,7 @@ public final class SimpleJumpPads extends JavaPlugin {
         jumpPadsManager.init();
 
         registerCommands();
+        registerMetrics(31959);
     }
 
     private void registerCommands() {
@@ -39,6 +42,12 @@ public final class SimpleJumpPads extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public void registerMetrics(int pluginId) {
+        Metrics metrics = new Metrics(this, pluginId);
+
+        metrics.addCustomChart(new SingleLineChart("total_jumppads_created", () -> jumpPadsManager.getJumpPadConfig().getJumpPads().size()));
     }
 
 
