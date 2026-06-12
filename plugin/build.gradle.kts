@@ -24,7 +24,6 @@ dependencies {
 
     var configLib = "4.+"
     implementation("de.exlll:configlib-yaml:${configLib}")
-    implementation("de.exlll:configlib-paper:${configLib}")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
