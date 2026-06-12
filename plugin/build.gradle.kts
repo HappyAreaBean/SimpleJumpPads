@@ -25,6 +25,8 @@ dependencies {
     var configLib = "4.+"
     implementation("de.exlll:configlib-yaml:${configLib}")
 
+    implementation("org.bstats:bstats-bukkit:3.2.1")
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -42,6 +44,7 @@ tasks.shadowJar {
     val base = "cc.happyareabean.jumppad.libs"
     relocate("de.exlll.configlib", "${base}.configlib")
     relocate("revxrsal.commands", "${base}.lamp")
+    relocate("org.bstats", "${base}.bstats")
     dependencies {
         exclude(dependency("org.snakeyaml:snakeyaml-engine")) // transitive dep from configlib
     }
