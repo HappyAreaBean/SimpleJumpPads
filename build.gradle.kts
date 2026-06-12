@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "cc.happyareabean"
-version = "1.0.1"
+version = "1.0.2"
 
 subprojects {
     apply(plugin = "java")
