@@ -33,15 +33,15 @@ import revxrsal.commands.bukkit.annotation.CommandPermission;
 import revxrsal.commands.help.Help;
 
 @SuppressWarnings({"unused"})
-@Command({"simplejumppad"})
-@CommandPermission("simplejumppad.admin")
+@Command({"simplejumppads", "sjp"})
+@CommandPermission("simplejumppads.admin")
 public class JumpPadsCommand {
 
     private final JumpPadsManager manager = SimpleJumpPad.INSTANCE.getJumpPadsManager();
 
     @CommandPlaceholder
     public void help(BukkitCommandActor actor, @Range(min= 1) @Default("1") int page, Help.RelatedCommands<BukkitCommandActor> help) {
-        CommandUtils.handleHelpMenu(actor, page, help, 8, "simplejumppad");
+        CommandUtils.handleHelpMenu(actor, page, help, 8);
     }
 
     @Subcommand("add")
