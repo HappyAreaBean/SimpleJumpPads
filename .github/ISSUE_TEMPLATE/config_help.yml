@@ -1,0 +1,71 @@
+name: Configuration Help
+description: Get help with plugin configuration
+title: "[Config Help] "
+labels: ["config-help"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Configuration Help Request
+
+        Need help setting up jump pads? Fill out the fields below.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to achieve?
+      description: Describe what you want the jump pads to do
+      placeholder: |
+        I want to create a jump pad that...
+        It should launch players...
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_config
+    attributes:
+      label: Current Configuration
+      description: Paste your jumppads.yml
+      placeholder: |
+        # Your jumppads.yml content here
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happens
+    attributes:
+      label: What's happening now?
+      description: Describe the current behavior vs expected behavior
+      placeholder: |
+        Current behavior: ...
+        Expected behavior: ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Plugin Version
+      placeholder: "e.g., 1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft / Paper Version
+      placeholder: "e.g., 1.21.11"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've read the documentation
+          required: true
+        - label: I've searched existing issues
+          required: true

@@ -1,0 +1,72 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature] "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+
+        Please fill out all fields. Incomplete requests may be closed.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: Describe the feature in detail
+      placeholder: |
+        Describe the feature you want...
+        Why would this be useful...
+        How should it work...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative approaches you've considered
+      placeholder: |
+        I considered...
+        But...
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Example Usage
+      description: Show how this feature could be used
+      placeholder: |
+        Command: /sjp newcommand ...
+        Result: ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - "Low - Nice to have"
+        - "Medium - Would improve the plugin"
+        - "High - Important missing feature"
+        - "Critical - Breaking functionality"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've searched existing issues first
+          required: true
+        - label: I've checked the documentation
+          required: true
+        - label: This is not a duplicate request
+          required: true

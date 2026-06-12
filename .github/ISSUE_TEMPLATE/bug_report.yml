@@ -1,0 +1,102 @@
+name: Bug Report
+description: Report a bug in the plugin
+title: "[Bug] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+
+        Please fill out all fields. Incomplete reports may be closed.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Describe the bug in detail
+      placeholder: |
+        Describe what happened...
+        Expected behavior was...
+        Actual behavior is...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Plugin Version
+      description: The version of SimpleJumpPads you're using
+      placeholder: "e.g., 1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft / Paper Version
+      description: Server Minecraft version
+      placeholder: "e.g., 1.21.11"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: java_version
+    attributes:
+      label: Java Version
+      description: Java version the server is running
+      options:
+        - "Java 21"
+        - "Java 21 (JetBrains)"
+        - "Java 17"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How to reproduce this bug (numbered steps)
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs
+      description: Paste relevant error logs (wrap in ``` for formatting)
+      placeholder: |
+        ```
+        [12:00:00] [Server thread/INFO]: ...
+        ```
+    validations:
+      required: false
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: Paste your jumppads.yml config (if relevant)
+      placeholder: |
+        # Your config here
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've searched existing issues first
+          required: true
+        - label: I'm using the latest version of the plugin
+          required: true
+        - label: I've tested with no other plugins installed
+          required: false

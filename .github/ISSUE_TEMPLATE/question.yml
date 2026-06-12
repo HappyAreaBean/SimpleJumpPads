@@ -1,0 +1,43 @@
+name: Question
+description: Ask a question about the plugin
+title: "[Question] "
+labels: ["question"]
+assignees: []
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What do you want to ask?
+      placeholder: |
+        I want to know...
+        I'm trying to understand...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Plugin Version
+      placeholder: "e.g., 1.0.0"
+    validations:
+      required: false
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft / Paper Version
+      placeholder: "e.g., 1.21.11"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've searched existing issues first
+          required: true
+        - label: I've checked the documentation
+          required: true
