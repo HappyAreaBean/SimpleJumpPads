@@ -65,24 +65,17 @@ jobs:
           config: cliff.toml
           args: --latest --strip header
 
-      - name: Upload Modrinth Release
-        uses: cloudnode-pro/modrinth-publish@v2
-        with:
-          token: ${{ secrets.MODRINTH_TOKEN }}
-          project: 'ewNLMW9y'
-          game-versions: |-
-            26.2
-            26.1.x
-            1.21.x
-            1.20.x
-            1.19.x
-          loaders: 'paper'              # Update to your supported loader(s) (e.g., paper, spigot, fabric)
-          channel: 'release'
-          version: ${{ steps.version.outputs.val }}
-          name: '${{ steps.version.outputs.val }}'
-          changelog: ${{ steps.git-cliff.outputs.content }}
-          files: |
-            plugin/build/libs/SimpleJumpPads-${{ steps.version.outputs.val }}.jar
+      - name: Save changelog
+        env:
+          CHANGELOG: ${{ steps.git-cliff.outputs.content }}
+        run: |
+          mkdir -p plugin/build/tmp
+          printf '%s' "$CHANGELOG" > plugin/build/tmp/CHANGELOG.txt
+
+      - name: Publish Modrinth
+        run: ./gradlew publishModrinth
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v7
