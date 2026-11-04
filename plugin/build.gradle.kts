@@ -101,3 +101,29 @@ tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
     }
     jvmArgs("-XX:+AllowEnhancedClassRedefinition")
 }
+
+publishMods {
+    modrinth {
+        accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+        projectId.set("SimpleJumpPads")
+        file.set(tasks.shadowJar.get().archiveFile)
+        type = STABLE
+        modLoaders.add("paper")
+        modLoaders.add("purpur")
+
+        val changelogFile = layout.projectDirectory
+            .file("build/tmp/CHANGELOG.txt")
+            .asFile
+
+        if (changelogFile.exists()) {
+            changelog.set(changelogFile.readText())
+        } else {
+            changelog.set(rootProject.version.toString())
+        }
+
+        minecraftVersionRange {
+            start.set("1.19")
+            end.set("26.3")
+        }
+    }
+}

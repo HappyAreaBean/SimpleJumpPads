@@ -4,6 +4,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "3.0.2" apply false
     id("com.gradleup.shadow") version "9.4.1" apply false
     id("de.eldoria.plugin-yml.paper") version "0.9.0" apply false
+    id("me.modmuss50.mod-publish-plugin") version "2.2.1" apply false
 }
 
 group = "cc.happyareabean"
@@ -13,6 +14,7 @@ subprojects {
     plugins.apply("java")
     plugins.apply("com.gradleup.shadow")
     plugins.apply("io.freefair.lombok")
+    plugins.apply("me.modmuss50.mod-publish-plugin")
 
     version = getProjectVersion()
 
