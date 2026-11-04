@@ -10,9 +10,9 @@ group = "cc.happyareabean"
 version = "1.0.2"
 
 subprojects {
-    apply(plugin = "java")
-    apply(plugin = "com.gradleup.shadow")
-    apply(plugin = "io.freefair.lombok")
+    plugins.apply("java")
+    plugins.apply("com.gradleup.shadow")
+    plugins.apply("io.freefair.lombok")
 
     version = getProjectVersion()
 
