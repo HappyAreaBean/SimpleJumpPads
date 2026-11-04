@@ -5,6 +5,12 @@ on:
     tags:
       - '*.*.*'       # Matches 1.0.0, 2.1.4, etc.
       - 'v*.*.*'      # Matches v1.0.0, v2.1.4, etc.
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag or version name to trigger build for (e.g., v1.0.0)'
+        required: false
+        type: string
 
 jobs:
   build-and-deploy:
@@ -13,6 +19,17 @@ jobs:
       contents: write
 
     steps:
+      - name: Determine Version Name
+        id: version
+        run: |
+          if [ -n "${{ inputs.tag_name }}" ]; then
+            echo "val=${{ inputs.tag_name }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "val=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "val=manual-${{ github.sha }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -51,8 +68,8 @@ jobs:
             1.20.x
             1.19.x
           loaders: 'paper'              # Update to your supported loader(s) (e.g., paper, spigot, fabric)
-          version-number: ${{ github.ref_name }}
-          version-title: '${{ github.ref_name }}'
+          version-number: ${{ steps.version.outputs.val }}
+          version-title: '${{ steps.version.outputs.val }}'
           changelog: ${{ steps.git-cliff.outputs.content }}
           files: |
             plugin/build/libs/*.jar
@@ -60,5 +77,5 @@ jobs:
       - name: Upload Build Artifacts to Actions
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-release-${{ github.ref_name }}
+          name: plugin-release-${{ steps.version.outputs.val }}
           path: plugin/build/libs/*.jar
