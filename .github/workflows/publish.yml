@@ -21,14 +21,19 @@ jobs:
     steps:
       - name: Determine Version Name
         id: version
+        env:
+          INPUT_TAG_NAME: ${{ inputs.tag_name }}
         run: |
-          if [ -n "${{ inputs.tag_name }}" ]; then
-            echo "val=${{ inputs.tag_name }}" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "val=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          if [ -n "$INPUT_TAG_NAME" ]; then
+            version="$INPUT_TAG_NAME"
+          elif [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            version="$GITHUB_REF_NAME"
           else
-            echo "val=manual-${{ github.sha }}" >> $GITHUB_OUTPUT
+            version="manual-${GITHUB_SHA}"
           fi
+
+          echo "Version name: $version"
+          echo "val=$version" >> "$GITHUB_OUTPUT"
 
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -77,11 +82,11 @@ jobs:
           name: '${{ steps.version.outputs.val }}'
           changelog: ${{ steps.git-cliff.outputs.content }}
           files: |
-            plugin/build/libs/*.jar
+            plugin/build/libs/SimpleJumpPads-${{ steps.version.outputs.val }}.jar
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v7
         with:
           name: build
-          path: plugin/build/libs/*.jar
+          path: plugin/build/libs/SimpleJumpPads-${{ steps.version.outputs.val }}.jar
           if-no-files-found: error
