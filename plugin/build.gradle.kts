@@ -105,7 +105,7 @@ tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
 publishMods {
     modrinth {
         accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
-        projectId.set("SimpleJumpPads")
+        projectId.set("ewNLMW9y")
         file.set(tasks.shadowJar.get().archiveFile)
         type = STABLE
         modLoaders.add("paper")
