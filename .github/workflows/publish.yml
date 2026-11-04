@@ -46,7 +46,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Build ShadowJar
-        run: ./gradlew :plugin:shadowJar
+        run: ./gradlew shadowJar
+
+      - name: Check generated JAR
+        run: find plugin/build/libs -maxdepth 1 -type f -name '*.jar' -print
 
       - name: Generate Changelog with git-cliff
         uses: orhun/git-cliff-action@v4
@@ -74,11 +77,11 @@ jobs:
           name: '${{ steps.version.outputs.val }}'
           changelog: ${{ steps.git-cliff.outputs.content }}
           files: |
-            plugin/build/libs/
+            plugin/build/libs/*.jar
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v7
         with:
           name: build
-          path: plugin/build/libs/
+          path: plugin/build/libs/*.jar
           if-no-files-found: error
