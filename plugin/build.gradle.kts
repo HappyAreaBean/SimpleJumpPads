@@ -18,7 +18,7 @@ repositories {
 dependencies {
     implementation(project(":shared"))
 
-    val lamp = "4.0.0-rc.+"
+    val lamp = "4.0.1"
     implementation("io.github.revxrsal:lamp.common:${lamp}")
     implementation("io.github.revxrsal:lamp.bukkit:${lamp}")
 
