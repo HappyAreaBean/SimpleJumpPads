@@ -1,0 +1,64 @@
+name: Release & Modrinth Deploy
+
+on:
+  push:
+    tags:
+      - '*.*.*'       # Matches 1.0.0, 2.1.4, etc.
+      - 'v*.*.*'      # Matches v1.0.0, v2.1.4, etc.
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build ShadowJar
+        run: ./gradlew :plugin:shadowJar
+
+      - name: Generate Changelog with git-cliff
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        env:
+          REPO_URL: "${{ github.server_url }}/${{ github.repository }}"
+        with:
+          config: cliff.toml
+          args: --latest --strip header
+
+      - name: Upload Modrinth Release
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project-id: 'ewNLMW9y'
+          game-versions: |-
+            26.2
+            26.1.x
+            1.21.x
+            1.20.x
+            1.19.x
+          loaders: 'paper'              # Update to your supported loader(s) (e.g., paper, spigot, fabric)
+          version-number: ${{ github.ref_name }}
+          version-title: '${{ github.ref_name }}'
+          changelog: ${{ steps.git-cliff.outputs.content }}
+          files: |
+            plugin/build/libs/*.jar
+
+      - name: Upload Build Artifacts to Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-release-${{ github.ref_name }}
+          path: plugin/build/libs/*.jar
