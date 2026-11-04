@@ -74,10 +74,11 @@ jobs:
           name: '${{ steps.version.outputs.val }}'
           changelog: ${{ steps.git-cliff.outputs.content }}
           files: |
-            plugin/build/libs/SimpleJumpPads-${{ steps.version.outputs.val }}.jar
+            plugin/build/libs/
 
-      - name: Upload Build Artifacts to Actions
+      - name: Upload app artifact
         uses: actions/upload-artifact@v7
         with:
-          name: plugin-release-${{ steps.version.outputs.val }}
-          path: plugin/build/libs/SimpleJumpPads-${{ steps.version.outputs.val }}.jar
+          name: build
+          path: plugin/build/libs/
+          if-no-files-found: error
